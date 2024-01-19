@@ -19,6 +19,14 @@ export default function Page() {
     }
   }
 
+  async function handleLoginWithGoogle() {
+    try {
+      await signIn('google', { callbackUrl: '/dashboard', redirect: true })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <form action={handleLogin}>
       <main className="w-[320px] space-y-1">
@@ -26,7 +34,10 @@ export default function Page() {
         <input name="email" type="text" placeholder="john@doe.com" />
         <label>Password</label>
         <input name="password" type="password" placeholder="password" />
-        <button>Login</button>
+        <button type="submit">Login</button>
+        <button type="button" onClick={handleLoginWithGoogle}>
+          Continue with Google
+        </button>
       </main>
     </form>
   )
